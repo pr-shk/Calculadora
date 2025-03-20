@@ -11,3 +11,5 @@ Exercício de calculadora
 ## V1.0.3 - Validating Numbers
 
 ## V1.0.4 - Mutiple Values
+
+## V1.0.5 - Multiple Languages
