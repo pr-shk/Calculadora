@@ -2,77 +2,109 @@
 using namespace std;
 int main (void)
 {
-    float var1, var2;
-    char op, continuar;
-    bool valido;
+    char continuar, nova_operacao;
+    float num;
+    char op;
+    float resultado, resultado_anterior = 0;  // Resultado inicial
+    bool primeira_operacao = true;  // Flag para controlar a primeira operação
 
     do
     {
-        valido = true;
-        cout << " ENTRE COM A SUA EXPRESSAO (num operador num). Ex: 2 + 3 => ";
-        do{
-            // Validação do primeiro número
-            do {
-                valido = true;
-                cin >> var1;
+        cout << "Digite os numeros e operadores separados por espaco.\n";
+        cout << "Exemplo: 2 + 3 * 4 - 5\n";
+        cout << "Pressione Enter para finalizar: ";
+
+        while (true) {
+            if (primeira_operacao) {
+                // Na primeira operação, pede os dois números e o operador
+                cin >> num;
                 if (cin.fail()) {
-                    cout << "Por favor, insira apenas numeros para o primeiro valor: ";
                     cin.clear();
                     cin.ignore(10000, '\n');
-                    valido = false;
+                    if (cin.peek() == '\n') break;
+                    cout << "Por favor, insira apenas numeros! Tente novamente: ";
+                    continue;
                 }
-            } while (!valido);
+                resultado = num;  // Primeiro número é o resultado inicial
+                resultado_anterior = num;  // Também inicializa o resultado anterior
+            }
 
-            // Validação do operador
-            do {
-                valido = true;
-                cin >> op;
-                if (op != '+' && op != '-' && op != '*' && op != '/') {
-                    cout << "Operador invalido! Use apenas +, -, * ou /: ";
-                    valido = false;
+            // Verifica se há mais entrada (operador)
+            if (cin.peek() == '\n') {
+                cout << "\nDeseja continuar a operacao? (s/n): ";
+                cin >> continuar;
+                while (continuar != 's' && continuar != 'S' && continuar != 'n' && continuar != 'N')
+                {
+                    cout << "Opcao invalida! Use apenas s ou n: ";
+                    cin >> continuar;
                 }
-            } while (!valido);
+                if (continuar == 'n' || continuar == 'N') {
+                    cout << "\nDeseja fazer uma nova operacao? (s/n): ";
+                    cin >> nova_operacao;
+                    while (nova_operacao != 's' && nova_operacao != 'S' && nova_operacao != 'n' && nova_operacao != 'N')
+                    {
+                        cout << "Opcao invalida! Use apenas s ou n: ";
+                        cin >> nova_operacao;
+                    }
+                    if (nova_operacao == 'n' || nova_operacao == 'N') {
+                        cout << "\nPrograma encerrado. Obrigado por usar a calculadora!\n";
+                        return 0;
+                    }
+                    resultado = 0;
+                    resultado_anterior = 0;
+                    primeira_operacao = true;
+                    cout << "\nDigite os numeros e operadores separados por espaco.\n";
+                    cout << "Exemplo: 2 + 3 * 4 - 5\n";
+                    cout << "Pressione Enter para finalizar: ";
+                    continue;
+                }
 
-            // Validação do segundo número
-            //do {
-                valido = true;
-                cin >> var2;
-                if (cin.fail()) {
-                    cout << "Por favor, insira apenas numeros para o segundo valor: ";
-                    cin.clear();
-                    cin.ignore(10000, '\n');
-                    valido = false;
-                }
-            //} while (!valido);
-        } while (!valido);
-        switch (op)
-            {
+            }
+            cin >> op;
+
+            // Valida o operador
+            if (op != '+' && op != '-' && op != '*' && op != '/') {
+                cout << "Operador invalido! Use apenas +, -, * ou /: ";
+                continue;
+            }
+
+            // Lê o próximo número
+            cin >> num;
+            if (cin.fail()) {
+                cout << "Por favor, insira apenas numeros! Tente novamente: ";
+                cin.clear();
+                cin.ignore(10000, '\n');
+                continue;
+            }
+
+            // Calcula o resultado parcial
+            switch (op) {
                 case '+': 
-                    cout << "Resultado : " << var1 << op << var2 << " = " << var1 + var2 << endl;
-                break;
+                    resultado += num;
+                    break;
                 case '-':
-                    cout << "Resultado : " << var1 << op << var2 << " = " << var1 - var2 << endl;
-                break;
+                    resultado -= num;
+                    break;
                 case '*':
-                    cout << "Resultado : " << var1 << op << var2 << " = " << var1 * var2 << endl;
-                break;
+                    resultado *= num;
+                    break;
                 case '/':
-                    if (var2 == 0.0)
-                        cout << "ERRO : DIVISAO POR ZERO ! ";
-                    else
-                        cout << "Resultado : " << var1 << op << var2 << " = " << var1 / var2 << endl;
-                break;
-            } /* FIM DO BLOCO DO SWITCH */
+                    if (num == 0.0) {
+                        cout << "ERRO: DIVISAO POR ZERO!" << endl;
+                        break;
+                    }
+                    resultado /= num;
+                    break;
+            }
 
-        cout << "\nDeseja fazer outra operacao? (s/n): ";
-        cin >> continuar;
-        while (continuar != 's' && continuar != 'S' && continuar != 'n' && continuar != 'N')
-        {
-            cout << "Opcao invalida! Use apenas s ou n: ";
-            cin >> continuar;
+            // Mostra o resultado parcial
+            cout << "Resultado parcial: " << resultado_anterior << " " << op << " " << num << " = " << resultado << endl;
+            resultado_anterior = resultado;
+            primeira_operacao = false;  // Após a primeira operação, muda para false
         }
-    } while (continuar == 's' || continuar == 'S');
 
-    cout << "\nPrograma encerrado. Obrigado por usar a calculadora!\n";
+        cout << "\nResultado final: " << resultado << endl;
+    } while (true);
+
     return 0;
 }
