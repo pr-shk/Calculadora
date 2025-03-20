@@ -1,2 +1,2 @@
 # Calculadora
-Exercíccio de calculadora
+Exercício de calculadora
