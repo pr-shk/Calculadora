@@ -9,24 +9,30 @@ int main (void)
     {
         cout << " ENTRE COM A SUA EXPRESSAO (num operador num). Ex: 2 + 3 => ";
         cin >> var1 >> op >> var2; /* le a expressao */
+        
+        // Validação do operador
+        while (op != '+' && op != '-' && op != '*' && op != '/') {
+            cout << "Operador invalido! Use apenas +, -, * ou /: ";
+            cin >> var1 >> op >> var2;
+        }
+
         switch (op)
             {
                 case '+': 
-                    cout << "Resultado : " << var1 + var2 << endl;
+                    cout << "Resultado : " << var1 << op << var2 << " = " << var1 + var2 << endl;
                 break;
                 case '-':
-                    cout << "Resultado : " << var1 - var2 << endl;
+                    cout << "Resultado : " << var1 << op << var2 << " = " << var1 - var2 << endl;
                 break;
                 case '*':
-                    cout << "Resultado : " << var1 * var2 << endl;
+                    cout << "Resultado : " << var1 << op << var2 << " = " << var1 * var2 << endl;
                 break;
                 case '/':
                     if (var2 == 0.0)
                         cout << "ERRO : DIVISAO POR ZERO ! ";
                     else
-                        cout << "Resultado : " << var1 / var2 << endl;
+                        cout << "Resultado : " << var1 << op << var2 << " = " << var1 / var2 << endl;
                 break;
-                default : cout << "ERRO: operador invalido. \n";
             } /* FIM DO BLOCO DO SWITCH */
 
         cout << "\nDeseja fazer outra operacao? (s/n): ";
