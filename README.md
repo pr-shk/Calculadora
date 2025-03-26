@@ -13,3 +13,5 @@ Exercício de calculadora
 ## V1.0.4 - Mutiple Values
 
 ## V1.0.5 - Multiple Languages
+
+## V.1.0.6 - Add Spanish and Separated Messages
