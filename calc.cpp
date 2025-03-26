@@ -1,6 +1,8 @@
 #include <iostream>
+#include "messages.h"
 using namespace std;
 
+/*
 // Estrutura para armazenar as mensagens em diferentes idiomas
 struct Messages {
     const char* enter_numbers; //1
@@ -51,9 +53,13 @@ const Messages EN = {
     "\nFinal result: ", //11
     "Enter the operator and number: " //12
 };
+*/
 
 int main (void)
 {
+    //#include "messages.h"
+
+
     char continuar, nova_operacao;
     float num;
     char op;
@@ -64,14 +70,15 @@ int main (void)
 
     // Seleção do idioma
     do {
-        cout << "Choose language / Escolha o idioma:\n";
-        cout << "1 - English\n";
-        cout << "2 - Portugues\n";
-        cout << "Choose / Escolha (1/2): ";
+        cout << "Choose language / Escolha o idioma / Elija el idioma:\n";
+        cout << "1 - English / Ingles / Ingles\n";
+        cout << "2 - Portugues / Portugues / Portugues\n";
+        cout << "3 - Espanol / Espanhol / Espanol\n";
+        cout << "Choose / Escolha / Elija (1/2/3): ";
         cin >> idioma;
-    } while (idioma != '1' && idioma != '2');
+    } while (idioma != '1' && idioma != '2' && idioma != '3');
 
-    msg = (idioma == '1') ? &EN : &PT; //(idioma == '2') ? &PT : &ES; // Adiciona Espanhol?
+    msg = (idioma == '1') ? &EN : (idioma == '2') ? &PT : &ES;
 
     do
     {
