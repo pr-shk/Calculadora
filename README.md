@@ -25,6 +25,6 @@ it will verify if there are any other cpp than main (calc.cpp) and add it to tas
 
 Those files are only needed to build and run in VS Code.
 
-Linkin the project of config_gerenator here:
+Linking the project of config_gerenator here:
 
 https://github.com/pr-shk/confgen_cpp
